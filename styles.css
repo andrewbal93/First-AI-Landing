@@ -1497,33 +1497,22 @@ body.is-menu-open .burger__line:nth-child(3) { transform: translateY(-6px) rotat
   backdrop-filter: blur(6px);
 }
 
-.dialog__screen {
+.dialog__video {
   position: relative;
-  display: grid;
-  place-items: center;
   aspect-ratio: 16 / 9;
-  margin-bottom: var(--space-5);
-  color: var(--c-plasma);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(79, 195, 247, 0.22), transparent 62%),
-    var(--c-bg);
+  margin-bottom: var(--space-4);
+  background: var(--c-bg);
   border: 1px solid var(--c-line);
   border-radius: var(--radius-m);
   overflow: hidden;
 }
 
-@keyframes pulse-ring {
-  from { transform: scale(0.5); opacity: 0.8; }
-  to { transform: scale(1.6); opacity: 0; }
-}
-
-.dialog__pulse {
+.dialog__frame {
   position: absolute;
-  width: 72px;
-  height: 72px;
-  border: 1.5px solid var(--c-plasma);
-  border-radius: 50%;
-  animation: pulse-ring 2s ease-out infinite;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .dialog__title {
@@ -1819,6 +1808,173 @@ body.is-menu-open .burger__line:nth-child(3) { transform: translateY(-6px) rotat
 body.is-menu-open .to-top {
   opacity: 0;
   pointer-events: none;
+}
+
+/* ===== GALLERY ===== */
+.section--gallery {
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 20%, rgba(79, 195, 247, 0.08), transparent 62%),
+    linear-gradient(180deg, var(--c-bg), var(--c-bg-2));
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.gallery__item {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.gallery__thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+
+.gallery__thumb img {
+  width: 100%;
+  /* сбрасывает height из HTML-атрибутов, иначе он перебивает aspect-ratio */
+  height: auto;
+  aspect-ratio: 8 / 5;
+  /* contain — фото всегда видно целиком, без обрезки краёв */
+  object-fit: contain;
+  background: var(--c-bg);
+  transition: transform 0.6s var(--ease);
+}
+
+.gallery__thumb:focus-visible {
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .gallery__thumb:hover {
+    border-color: var(--c-plasma);
+    box-shadow: 0 18px 60px -25px rgba(79, 195, 247, 0.55);
+  }
+
+  .gallery__thumb:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.gallery__caption {
+  margin-top: var(--space-2);
+  padding-inline: 4px;
+  color: var(--c-muted);
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .gallery__item--wide .gallery__thumb img {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+/* ===== GALLERY LIGHTBOX ===== */
+.gallery-dialog {
+  width: min(94vw, 1040px);
+  padding: var(--space-4);
+}
+
+.lb {
+  position: relative;
+  margin: 0;
+}
+
+.lb__image {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+}
+
+.lb__bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 4px 0;
+}
+
+.lb__caption {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.lb__counter {
+  flex: none;
+  color: var(--c-muted);
+  font-family: var(--font-brand);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.lb__nav,
+.lb__close {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  background: rgba(12, 19, 40, 0.85);
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  color: var(--c-text);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.25s, color 0.25s, background-color 0.25s;
+}
+
+.lb__nav {
+  top: calc(50% - 34px);
+  width: 48px;
+  height: 48px;
+  transform: translateY(-50%);
+}
+
+.lb__nav:hover,
+.lb__close:hover {
+  border-color: var(--c-plasma);
+  color: var(--c-plasma);
+}
+
+.lb__nav--prev { left: 12px; }
+.lb__nav--next { right: 12px; }
+
+.lb__close {
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 560px) {
+  .lb__nav {
+    width: 42px;
+    height: 42px;
+  }
+
+  .lb__bar {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
 }
 
 /* ===== REDUCED MOTION ===== */

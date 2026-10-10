@@ -40,6 +40,7 @@
           <li><a class="nav__link" href="#ship">Корабль</a></li>
           <li><a class="nav__link" href="#pricing">Тарифы</a></li>
           <li><a class="nav__link" href="#dates">Даты</a></li>
+          <li><a class="nav__link" href="#gallery">Галерея</a></li>
           <li><a class="nav__link" href="#reviews">Отзывы</a></li>
           <li><a class="nav__link" href="#faq">FAQ</a></li>
           <li class="nav__item--cta"><a class="btn btn--primary btn--block" href="#booking">Забронировать</a></li>
@@ -460,6 +461,54 @@
       </div>
     </section>
 
+    <!-- ===== ГАЛЕРЕЯ ===== -->
+    <section class="section section--gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2 class="section__title" id="gallery-title">Кадры из полёта</h2>
+          <p class="section__lede">Пять снимков: старт, кабина, невесомость, горизонт и посадка. Нажмите на кадр, чтобы рассмотреть крупнее.</p>
+        </div>
+
+        <div class="gallery reveal">
+          <figure class="gallery__item gallery__item--wide">
+            <button class="gallery__thumb" type="button" data-gallery-open aria-label="Открыть фото крупнее: Старт Aurora-1">
+              <img src="images/gallery-01-launch.webp" alt="Старт Aurora-1 со стартового стола" width="1600" height="700" loading="lazy" decoding="async">
+            </button>
+            <figcaption class="gallery__caption">Старт Aurora-1, T+45 секунд</figcaption>
+          </figure>
+
+          <figure class="gallery__item">
+            <button class="gallery__thumb" type="button" data-gallery-open aria-label="Открыть фото крупнее: Земля из иллюминатора">
+              <img src="images/gallery-02-earth-window.webp" alt="Земля за иллюминатором: океан, суша и тонкая плёнка атмосферы" width="1600" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption class="gallery__caption">Земля из иллюминатора, 100 км</figcaption>
+          </figure>
+
+          <figure class="gallery__item">
+            <button class="gallery__thumb" type="button" data-gallery-open aria-label="Открыть фото крупнее: Невесомость в кабине">
+              <img src="images/gallery-03-weightless.webp" alt="Пассажиры парят в невесомости внутри кабины" width="1600" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption class="gallery__caption">Пять минут невесомости</figcaption>
+          </figure>
+
+          <figure class="gallery__item">
+            <button class="gallery__thumb" type="button" data-gallery-open aria-label="Открыть фото крупнее: Кривизна горизонта">
+              <img src="images/gallery-04-horizon.webp" alt="Изогнутый горизонт Земли и тонкая синяя линия атмосферы" width="1600" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption class="gallery__caption">Линия Кармана на рассвете</figcaption>
+          </figure>
+
+          <figure class="gallery__item">
+            <button class="gallery__thumb" type="button" data-gallery-open aria-label="Открыть фото крупнее: Посадка на полосу">
+              <img src="images/gallery-05-landing.webp" alt="Корабль у самой посадочной полосы с огнями освещения" width="1600" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption class="gallery__caption">Мягкая посадка на полосу</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ===== ОТЗЫВЫ ===== -->
     <section class="section section--reviews" id="reviews" aria-labelledby="reviews-title">
       <div class="container">
@@ -663,6 +712,7 @@
             <li><a href="#mission">Миссия</a></li>
             <li><a href="#ship">Корабль</a></li>
             <li><a href="#pricing">Тарифы</a></li>
+            <li><a href="#gallery">Галерея</a></li>
           </ul>
         </nav>
 
@@ -691,16 +741,33 @@
 
   <!-- ===== VIDEO DIALOG ===== -->
   <dialog class="dialog" id="video-dialog" aria-labelledby="video-title">
-    <div class="dialog__screen" aria-hidden="true">
-      <span class="dialog__pulse"></span>
-      <svg viewBox="0 0 24 24" width="40" height="40" focusable="false"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg>
-    </div>
-    <h2 class="dialog__title" id="video-title">Ролик ещё монтируется</h2>
-    <p class="dialog__text">Съёмка полёта Aurora-1 готовится к публикации. А пока посмотрите, как проходит полёт, по этапам.</p>
+    <h2 class="dialog__title" id="video-title">Ролик о полёте Aurora-1</h2>
+    <div class="dialog__video" data-video-embed></div>
+    <p class="dialog__text">Как проходит суборбитальный полёт: от старта и набора высоты до невесомости и посадки.</p>
     <div class="dialog__actions">
-      <a class="btn btn--primary" href="#flight" data-dialog-close>Смотреть этапы полёта</a>
-      <button class="btn btn--ghost" type="button" data-dialog-close>Закрыть</button>
+      <button class="btn btn--ghost btn--block" type="button" data-dialog-close>Закрыть</button>
     </div>
+  </dialog>
+
+  <!-- ===== GALLERY DIALOG ===== -->
+  <dialog class="dialog gallery-dialog" id="gallery-dialog" aria-labelledby="lb-caption">
+    <figure class="lb">
+      <img class="lb__image" data-lb-image src="" alt="">
+      <figcaption class="lb__bar">
+        <span class="lb__caption" id="lb-caption" data-lb-caption></span>
+        <span class="lb__counter" data-lb-counter aria-live="polite"></span>
+      </figcaption>
+
+      <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Предыдущее фото">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Следующее фото">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="lb__close" type="button" data-lb-close aria-label="Закрыть галерею">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </figure>
   </dialog>
 
   <!-- ===== BACK TO TOP ===== -->

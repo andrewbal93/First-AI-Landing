@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Placeholder: earth seen from a porthole">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070b18"/>
+      <stop offset="1" stop-color="#0a0f1f"/>
+    </linearGradient>
+    <radialGradient id="plasma2" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#4fc3f7" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+
+  <g fill="#ffffff">
+    <circle cx="90" cy="70" r="1.6" opacity=".8"/>
+    <circle cx="180" cy="140" r="1.1" opacity=".6"/>
+    <circle cx="300" cy="60" r="1.3" opacity=".7"/>
+    <circle cx="640" cy="90" r="1.7" opacity=".8"/>
+    <circle cx="720" cy="180" r="1.1" opacity=".5"/>
+    <circle cx="560" cy="50" r="1.2" opacity=".6"/>
+    <circle cx="120" cy="230" r="1" opacity=".4"/>
+    <circle cx="680" cy="300" r="1.2" opacity=".4"/>
+    <circle cx="420" cy="120" r="1" opacity=".5"/>
+    <circle cx="240" cy="320" r="1.1" opacity=".35"/>
+  </g>
+
+  <radialGradient id="atmo2" cx="50%" cy="50%" r="50%"><stop offset=".62" stop-color="#4fc3f7" stop-opacity="0"/><stop offset=".78" stop-color="#4fc3f7" stop-opacity=".4"/><stop offset="1" stop-color="#4fc3f7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="ocean2" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#1f5a92"/><stop offset=".6" stop-color="#0d2a50"/><stop offset="1" stop-color="#050d1f"/></radialGradient>
+  <circle cx="400" cy="250" r="230" fill="url(#atmo2)"/>
+  <circle cx="400" cy="250" r="165" fill="url(#ocean2)"/>
+  <g clip-path="none" fill="rgba(79,195,247,.34)" stroke="rgba(160,225,255,.5)" stroke-width="1">
+    <path d="M300 190c30-18 80-6 88 24s-30 52-62 46-52-52-26-70z"/>
+    <path d="M400 290c26-14 66 2 72 26s-34 44-64 36-34-48-8-62z"/>
+    <path d="M330 320c18-10 46 4 50 20s-20 30-42 24-26-34-8-44z"/>
+  </g>
+  <circle cx="400" cy="250" r="165" fill="none" stroke="#4fc3f7" stroke-opacity=".5" stroke-width="2"/>
+  <circle cx="400" cy="250" r="215" fill="none" stroke="#9aa5bd" stroke-opacity=".5" stroke-width="14"/>
+  <circle cx="400" cy="250" r="228" fill="none" stroke="#0a0f1f" stroke-width="10"/>
+<text x="24" y="472" fill="#9aa5bd" font-family="sans-serif" font-size="13" letter-spacing="1">ORBITAL - placeholder, replace with real photo</text>
+</svg>

@@ -311,14 +311,38 @@ function initStarfield() {
 function initVideoDialog() {
   const dialog = document.getElementById('video-dialog');
   const openers = document.querySelectorAll('[data-video-open]');
-  if (!dialog || typeof dialog.showModal !== 'function') return;
+  const embed = dialog ? dialog.querySelector('[data-video-embed]') : null;
+  if (!dialog || !embed || typeof dialog.showModal !== 'function') return;
+
+  // nocookie-домен; autoplay срабатывает, потому что открытие — действие пользователя
+  const VIDEO_SRC = 'https://www.youtube-nocookie.com/embed/u81Jlrp_CG0?autoplay=1&rel=0';
+
+  // iframe создаётся только при открытии — YouTube не грузится заранее,
+  // а при закрытии удаляется вместе с воспроизведением
+  function mount() {
+    const iframe = document.createElement('iframe');
+    iframe.className = 'dialog__frame';
+    iframe.src = VIDEO_SRC;
+    iframe.title = 'Видео о полёте Aurora-1';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+    embed.replaceChildren(iframe);
+  }
+
+  function unmount() {
+    embed.replaceChildren();
+  }
 
   openers.forEach((opener) => {
     opener.addEventListener('click', (event) => {
       event.preventDefault();
+      mount();
       dialog.showModal();
     });
   });
+
+  dialog.addEventListener('close', unmount);
 
   dialog.querySelectorAll('[data-dialog-close]').forEach((button) => {
     button.addEventListener('click', () => dialog.close());
@@ -572,6 +596,77 @@ function initBookingLinks() {
   updateChip();
 }
 
+/* ===== GALLERY LIGHTBOX ===== */
+function initGallery() {
+  const dialog = document.getElementById('gallery-dialog');
+  const openers = [...document.querySelectorAll('[data-gallery-open]')];
+  if (!dialog || !openers.length || typeof dialog.showModal !== 'function') return;
+
+  const imageEl = dialog.querySelector('[data-lb-image]');
+  const captionEl = dialog.querySelector('[data-lb-caption]');
+  const counterEl = dialog.querySelector('[data-lb-counter]');
+  const prevButton = dialog.querySelector('[data-lb-prev]');
+  const nextButton = dialog.querySelector('[data-lb-next]');
+  const closeButton = dialog.querySelector('[data-lb-close]');
+
+  // Данные о кадрах берём из самой разметки — единый источник правды
+  const items = openers.map((opener) => {
+    const img = opener.querySelector('img');
+    const figure = opener.closest('figure');
+    const caption = figure ? figure.querySelector('.gallery__caption') : null;
+    return {
+      src: img.getAttribute('src'),
+      alt: img.getAttribute('alt'),
+      caption: caption ? caption.textContent.trim() : '',
+    };
+  });
+
+  let currentIndex = 0;
+
+  function render() {
+    const item = items[currentIndex];
+    imageEl.src = item.src;
+    imageEl.alt = item.alt;
+    captionEl.textContent = item.caption;
+    counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
+  }
+
+  function open(index) {
+    currentIndex = index;
+    render();
+    dialog.showModal();
+  }
+
+  function step(delta) {
+    currentIndex = (currentIndex + delta + items.length) % items.length;
+    render();
+  }
+
+  openers.forEach((opener, index) => {
+    opener.addEventListener('click', () => open(index));
+  });
+
+  prevButton.addEventListener('click', () => step(-1));
+  nextButton.addEventListener('click', () => step(1));
+  closeButton.addEventListener('click', () => dialog.close());
+
+  // Листание стрелками клавиатуры
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') step(-1);
+    if (event.key === 'ArrowRight') step(1);
+  });
+
+  // Закрытие кликом по затемнённому фону (как у video dialog)
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+
+  // Возврат фокуса на миниатюру, с которой открыли
+  dialog.addEventListener('close', () => {
+    openers[currentIndex]?.focus();
+  });
+}
+
 /* ===== BACK TO TOP ===== */
 function initToTop() {
   const button = document.querySelector('[data-to-top]');
@@ -719,4 +814,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingLinks();
   initLeadForm();
   initToTop();
+  initGallery();
 });

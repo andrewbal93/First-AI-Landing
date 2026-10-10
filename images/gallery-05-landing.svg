@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Placeholder: landing on the runway">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070b18"/>
+      <stop offset="1" stop-color="#0a0f1f"/>
+    </linearGradient>
+    <radialGradient id="plasma5" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#4fc3f7" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg5)"/>
+
+  <g fill="#ffffff">
+    <circle cx="90" cy="70" r="1.6" opacity=".8"/>
+    <circle cx="180" cy="140" r="1.1" opacity=".6"/>
+    <circle cx="300" cy="60" r="1.3" opacity=".7"/>
+    <circle cx="640" cy="90" r="1.7" opacity=".8"/>
+    <circle cx="720" cy="180" r="1.1" opacity=".5"/>
+    <circle cx="560" cy="50" r="1.2" opacity=".6"/>
+    <circle cx="120" cy="230" r="1" opacity=".4"/>
+    <circle cx="680" cy="300" r="1.2" opacity=".4"/>
+    <circle cx="420" cy="120" r="1" opacity=".5"/>
+    <circle cx="240" cy="320" r="1.1" opacity=".35"/>
+  </g>
+
+  <radialGradient id="sun5" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff6b35" stop-opacity=".5"/><stop offset="1" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
+  <circle cx="400" cy="150" rx="200" ry="90" fill="url(#sun5)"/>
+  <path d="M-40 500 L330 240 L470 240 L840 500 Z" fill="#0c1328" stroke="#4fc3f7" stroke-opacity=".35" stroke-width="2"/>
+  <g stroke="#4fc3f7" stroke-opacity=".7" stroke-width="6" stroke-dasharray="26 22">
+    <path d="M400 250V480"/>
+  </g>
+  <g fill="#ff6b35">
+    <circle cx="300" cy="330" r="5"/><circle cx="500" cy="330" r="5"/>
+    <circle cx="268" cy="390" r="5"/><circle cx="532" cy="390" r="5"/>
+    <circle cx="230" cy="460" r="5"/><circle cx="570" cy="460" r="5"/>
+  </g>
+  <g>
+    <ellipse cx="400" cy="236" rx="52" ry="14" fill="#9aa5bd" opacity=".35"/>
+    <path d="M400 160c20 24 28 46 28 62h-56c0-16 8-38 28-62z" fill="#132140" stroke="#4fc3f7" stroke-opacity=".75" stroke-width="2"/>
+    <path d="M372 214l-26 24 26-4zM428 214l26 24-26-4z" fill="#132140" stroke="#4fc3f7" stroke-opacity=".5" stroke-width="2"/>
+  </g>
+<text x="24" y="472" fill="#9aa5bd" font-family="sans-serif" font-size="13" letter-spacing="1">ORBITAL - placeholder, replace with real photo</text>
+</svg>
