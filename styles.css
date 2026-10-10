@@ -648,7 +648,8 @@ body.is-menu-open .burger__line:nth-child(3) { transform: translateY(-6px) rotat
   color: var(--c-muted);
 }
 
-@media (min-width: 768px) {
+/* 3 колонки только с 1024px: на 768px колонки ~224px — текст «столбиком» */
+@media (min-width: 1024px) {
   .grid--3 { grid-template-columns: repeat(3, 1fr); }
 }
 
