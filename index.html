@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ReptTea — концепция тропической чайной и пространства знакомства с рептилиями в Одессе.">
+<meta name="theme-color" content="#123b2d">
+<title>ReptTea — чай в компании чешуйчатых друзей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:#123b2d; --forest-2:#1c523c; --leaf:#a8c95a; --lime:#d7ed85;
+  --cream:#f8f4e8; --paper:#fffdf6; --sand:#e9e0c9; --coral:#ed805f;
+  --ink:#1d3027; --muted:#68766b; --line:rgba(18,59,45,.16);
+  --serif:"Playfair Display", Georgia, serif; --sans:"DM Sans", Arial, sans-serif;
+  --radius:24px; --shadow:0 18px 50px rgba(18,59,45,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.6}
+img{display:block;max-width:100%;width:100%;object-fit:cover}
+a{color:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+.container{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+.eyebrow{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:var(--forest-2)}
+.eyebrow:before{content:"";width:26px;height:2px;background:var(--coral)}
+h1,h2,h3,p{margin-top:0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:-.035em}
+h2{font-size:clamp(2.2rem,4vw,3.8rem);margin-bottom:18px}
+p{margin-bottom:1rem}
+.section{padding:100px 0}
+.section-head{max-width:690px;margin:0 auto 42px;text-align:center}
+.section-head .eyebrow{justify-content:center}
+.section-head p{color:var(--muted);max-width:540px;margin:0 auto}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(18,59,45,.96);color:var(--cream);border-bottom:1px solid rgba(255,255,255,.12)}
+.header-inner{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-size:1.65rem;font-weight:700;letter-spacing:-.05em}
+.logo-mark{width:34px;height:34px;border-radius:50% 50% 45% 15%;background:var(--lime);color:var(--forest);display:grid;place-items:center;font-family:var(--sans);font-size:1.1rem;transform:rotate(-12deg)}
+.logo span:last-child{color:var(--lime)}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a{text-decoration:none;font-size:.9rem;color:rgba(248,244,232,.88);transition:color .2s}
+.nav a:hover{color:var(--lime)}
+.header-cta,.button{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:13px 21px;border-radius:999px;background:var(--lime);color:var(--forest);font-weight:700;text-decoration:none;border:1px solid transparent;transition:transform .2s,background .2s}
+.header-cta{padding:10px 17px;font-size:.88rem}
+.header-cta:hover,.button:hover{transform:translateY(-2px);background:#e5f5a7}
+.button--outline{background:transparent;border-color:rgba(248,244,232,.65);color:var(--cream)}
+.button--outline:hover{background:rgba(255,255,255,.1);color:white}
+.menu-toggle{display:none;background:none;border:1px solid rgba(255,255,255,.35);color:white;border-radius:12px;padding:9px 12px;font-size:1.2rem}
+.hero{background:var(--forest);color:var(--cream);position:relative;overflow:hidden;padding:54px 0 78px}
+.hero:before{content:"";position:absolute;width:460px;height:460px;border:1px solid rgba(215,237,133,.18);border-radius:50%;right:-180px;top:-180px;box-shadow:0 0 0 45px rgba(215,237,133,.035),0 0 0 90px rgba(215,237,133,.025)}
+.hero-grid{display:grid;grid-template-columns:.93fr 1.07fr;align-items:center;gap:54px;position:relative;z-index:1}
+.hero-copy{padding:34px 0}
+.hero .eyebrow{color:var(--lime)}
+.hero h1{font-size:clamp(3.2rem,6.2vw,6.25rem);max-width:680px;margin:22px 0}
+.hero h1 em{color:var(--lime);font-style:normal}
+.hero-copy>p{font-size:1.1rem;max-width:480px;color:rgba(248,244,232,.78);margin-bottom:28px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;align-items:center;gap:12px;margin-top:35px;color:rgba(248,244,232,.72);font-size:.85rem}
+.note-dot{width:9px;height:9px;background:var(--coral);border-radius:50%;box-shadow:0 0 0 5px rgba(237,128,95,.15)}
+.hero-visual{position:relative;min-height:570px}
+.hero-photo{position:absolute;inset:0 20px 20px 0;height:calc(100% - 20px);border-radius:46% 46% 24px 24px;overflow:hidden}
+.hero-photo img{height:100%;filter:saturate(.9)}
+.hero-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,37,27,.02),rgba(12,37,27,.25))}
+.photo-tag{position:absolute;z-index:2;right:0;bottom:0;background:var(--lime);color:var(--forest);padding:18px 22px;border-radius:18px;font-size:.84rem;font-weight:700;max-width:200px;box-shadow:var(--shadow)}
+.photo-tag strong{display:block;font-family:var(--serif);font-size:1.35rem}
+.hero-sticker{position:absolute;left:-25px;top:72px;width:105px;height:105px;border-radius:50%;background:var(--coral);color:#fff8e9;display:grid;place-items:center;text-align:center;line-height:1.1;font-family:var(--serif);font-size:1.05rem;transform:rotate(-10deg);z-index:3;border:5px solid var(--forest)}
+.intro-strip{background:var(--lime);color:var(--forest);padding:18px 0}
+.strip-inner{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;font-size:.84rem;font-weight:700;letter-spacing:.03em}
+.strip-inner span{display:flex;align-items:center;gap:9px}
+.strip-inner i{width:5px;height:5px;border-radius:50%;background:var(--coral)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:76px;align-items:center}
+.about-collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+.about-collage img{height:260px;border-radius:var(--radius)}
+.about-collage img:first-child{margin-top:42px}
+.about-collage img:nth-child(2){height:210px}
+.about-collage img:nth-child(3){height:210px}
+.about-collage img:nth-child(4){margin-top:-50px;height:260px}
+.about-copy .eyebrow{margin-bottom:18px}
+.about-copy p{color:var(--muted)}
+.about-copy .button{margin-top:12px;background:var(--forest);color:var(--cream)}
+.about-copy .button:hover{background:var(--forest-2)}
+.fact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:35px;padding-top:24px;border-top:1px solid var(--line)}
+.fact strong{display:block;font-family:var(--serif);font-size:1.8rem;color:var(--forest)}
+.fact span{font-size:.78rem;color:var(--muted)}
+.animals{background:#e8edda}
+.animal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.animal-card{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:0 5px 20px rgba(18,59,45,.05)}
+.animal-card img{height:285px;transition:transform .5s}
+.animal-card:hover img{transform:scale(1.035)}
+.animal-image{overflow:hidden;position:relative}
+.animal-number{position:absolute;top:16px;left:16px;background:var(--cream);color:var(--forest);border-radius:99px;padding:6px 11px;font-size:.75rem;font-weight:700}
+.animal-info{padding:23px 24px 25px}
+.animal-info h3{font-size:1.65rem;margin-bottom:8px}
+.animal-info p{color:var(--muted);font-size:.92rem;margin-bottom:0}
+.animal-meta{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:.75rem;color:var(--forest-2);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.section-link{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;color:var(--forest);border-bottom:1px solid var(--forest);padding-bottom:5px;margin-top:30px}
+.section-link span{font-size:1.2rem}
+.menu-section{background:var(--forest);color:var(--cream)}
+.menu-section .eyebrow{color:var(--lime)}
+.menu-section .section-head p{color:rgba(248,244,232,.68)}
+.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.drink-card{background:#1b4938;border:1px solid rgba(248,244,232,.12);border-radius:22px;overflow:hidden}
+.drink-card img{height:220px;transition:transform .45s}
+.drink-card:hover img{transform:scale(1.04)}
+.drink-image{overflow:hidden}
+.drink-info{padding:19px}
+.drink-type{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--lime);font-weight:700}
+.drink-info h3{font-size:1.35rem;margin:8px 0}
+.drink-info p{font-size:.84rem;color:rgba(248,244,232,.7);min-height:67px;margin-bottom:16px}
+.drink-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid rgba(248,244,232,.16);padding-top:14px}
+.price{font-weight:700;color:var(--lime);font-size:1.05rem}
+.drink-bottom small{font-size:.72rem;color:rgba(248,244,232,.6)}
+.experience-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:68px;align-items:center}
+.experience-photo{height:590px;border-radius:150px 150px 24px 24px;overflow:hidden}
+.experience-photo img{height:100%}
+.steps{margin-top:30px}
+.step{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.step-num{width:42px;height:42px;border-radius:50%;background:var(--lime);color:var(--forest);display:grid;place-items:center;font-weight:700}
+.step h3{font-family:var(--sans);font-size:1rem;letter-spacing:0;margin:1px 0 5px;font-weight:700}
+.step p{font-size:.9rem;color:var(--muted);margin:0}
+.gallery{padding-top:25px}
+.gallery-grid{display:grid;grid-template-columns:1.15fr .85fr 1fr;grid-template-rows:220px 220px;gap:14px}
+.gallery-grid figure{margin:0;overflow:hidden;border-radius:20px;position:relative}
+.gallery-grid figure:first-child{grid-row:span 2}
+.gallery-grid figure:nth-child(4){grid-column:2 / 4}
+.gallery-grid img{height:100%;transition:transform .5s}
+.gallery-grid figure:hover img{transform:scale(1.04)}
+.gallery-grid figcaption{position:absolute;left:14px;bottom:14px;background:rgba(18,59,45,.88);color:#fffdf6;padding:7px 12px;border-radius:99px;font-size:.76rem}
+.faq-section{background:#e8edda}
+.faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}
+.faq-intro p{color:var(--muted)}
+.faq-list details{border-bottom:1px solid rgba(18,59,45,.2);padding:20px 0}
+.faq-list summary{cursor:pointer;list-style:none;font-weight:700;display:flex;justify-content:space-between;gap:20px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";font-size:1.4rem;font-weight:400;color:var(--forest-2)}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{color:var(--muted);margin:14px 36px 0 0}
+.booking-banner{background:var(--coral);color:#fff9ec;padding:66px 0}
+.booking-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}
+.booking-inner h2{font-size:clamp(2.2rem,4vw,3.4rem);max-width:680px;margin-bottom:12px}
+.booking-inner p{margin:0;color:rgba(255,249,236,.86)}
+.booking-inner .button{background:var(--forest);color:var(--cream);flex-shrink:0}
+.booking-inner .button:hover{background:var(--forest-2)}
+.contacts{background:var(--paper)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:26px}
+.contact-card{padding:32px;border:1px solid var(--line);border-radius:var(--radius)}
+.contact-card h3{font-size:1.65rem}
+.contact-lines{list-style:none;margin:22px 0 0;padding:0}
+.contact-lines li{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:.9rem}
+.contact-lines li span{color:var(--muted)}
+.contact-lines li strong{text-align:right}
+.social-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.social-links a{border:1px solid var(--line);border-radius:99px;padding:9px 14px;text-decoration:none;font-size:.82rem;font-weight:700}
+.map-panel{min-height:350px;border-radius:var(--radius);overflow:hidden;position:relative;background:#d9e1c9}
+.map-panel img{height:100%;position:absolute;inset:0;filter:saturate(.65)}
+.map-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:25px;background:linear-gradient(180deg,transparent 20%,rgba(18,59,45,.78))}
+.map-label{background:var(--paper);padding:18px 21px;border-radius:16px;max-width:320px}
+.map-label strong{display:block;margin-bottom:4px}
+.map-label span{font-size:.84rem;color:var(--muted)}
+.disclaimer{font-size:.78rem;color:var(--muted);margin-top:18px}
+.footer{background:#0c2c22;color:var(--cream);padding:35px 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.footer p{margin:0;color:rgba(248,244,232,.62);font-size:.8rem}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:.8rem;color:rgba(248,244,232,.78);text-decoration:none}
+.footer-links a:hover{color:var(--lime)}
+@media(max-width:950px){
+ .nav{gap:16px}.nav a{font-size:.82rem}.header-cta{display:none}
+ .hero-grid{gap:30px}.hero-visual{min-height:490px}.hero h1{font-size:clamp(3rem,7vw,5rem)}
+ .about-grid,.experience-grid{gap:38px}.menu-grid{grid-template-columns:repeat(2,1fr)}
+ .drink-card img{height:250px}.animal-card img{height:230px}
+ .faq-layout{gap:40px}
+}
+@media(max-width:700px){
+ .container{width:min(100% - 32px,540px)}
+ .section{padding:70px 0}
+ .header-inner{height:68px}.menu-toggle{display:block}
+ .nav{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 24px 24px;background:var(--forest);flex-direction:column;align-items:stretch;gap:0;border-top:1px solid rgba(255,255,255,.12)}
+ .nav.is-open{display:flex}.nav a{padding:12px 0;font-size:1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+ .hero{padding:35px 0 55px}.hero-grid{grid-template-columns:1fr;gap:25px}
+ .hero-copy{padding:12px 0 0}.hero h1{font-size:clamp(3.2rem,13vw,5rem);margin:17px 0}
+ .hero-copy>p{font-size:1rem}.hero-visual{min-height:420px;margin:0 5px 0 18px}
+ .hero-photo{inset:0 12px 16px 0}.hero-sticker{left:-20px;top:35px;width:84px;height:84px;font-size:.9rem}
+ .photo-tag{padding:13px 15px;max-width:170px}.photo-tag strong{font-size:1.15rem}
+ .strip-inner{gap:10px 18px;font-size:.72rem}
+ .about-grid,.experience-grid,.faq-layout,.contact-grid{grid-template-columns:1fr;gap:35px}
+ .about-collage img{height:210px}.about-collage img:nth-child(2){height:175px}.about-collage img:nth-child(3){height:175px}.about-collage img:nth-child(4){height:210px}
+ .fact strong{font-size:1.5rem}.fact span{font-size:.7rem}
+ .animal-grid{grid-template-columns:1fr;gap:18px}.animal-card img{height:300px}
+ .menu-grid{grid-template-columns:1fr 1fr;gap:12px}.drink-card{border-radius:17px}.drink-card img{height:160px}
+ .drink-info{padding:14px}.drink-info h3{font-size:1.15rem}.drink-info p{font-size:.8rem;min-height:96px}
+ .drink-bottom{align-items:flex-start;flex-direction:column;gap:3px}
+ .experience-photo{height:390px;max-width:420px;margin:auto;width:100%}
+ .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px;gap:10px}
+ .gallery-grid figure:first-child{grid-row:span 2}.gallery-grid figure:nth-child(4){grid-column:auto}
+ .gallery-grid figure:last-child{display:none}
+ .booking-inner{align-items:flex-start;flex-direction:column;gap:22px}
+ .booking-banner{padding:50px 0}.contact-card{padding:24px}
+ .map-panel{min-height:300px}.footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:390px){
+ .hero-actions{flex-direction:column;align-items:stretch}.hero-actions .button{width:100%}
+ .menu-grid{grid-template-columns:1fr}.drink-card img{height:220px}.drink-info p{min-height:0}
+ .gallery-grid{grid-template-rows:155px 155px 155px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="ReptTea — на главную"><span class="logo-mark">R</span>Rept<span>Tea</span></a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#about">О нас</a><a href="#animals">Рептилии</a><a href="#menu">Меню</a><a href="#gallery">Галерея</a><a href="#contacts">Контакты</a>
+    </nav>
+    <a class="header-cta" href="#booking">Планировать визит <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+  </div>
+</header>
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Тропическая чайная · Одесса</div>
+        <h1>Немного дикой природы.<br><em>Много уюта.</em></h1>
+        <p>Место, где ароматный чай встречается с удивительным миром рептилий. Замедлитесь, оглянитесь — и познакомьтесь с теми, кто обычно живёт по другую сторону стекла.</p>
+        <div class="hero-actions">
+          <a class="button" href="#booking">Запланировать визит <span aria-hidden="true">↗</span></a>
+          <a class="button button--outline" href="#animals">Знакомство с рептилиями</a>
+        </div>
+        <div class="hero-note"><span class="note-dot"></span> Спокойная атмосфера · Уважение к животным</div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=85" alt="Густая зелень тропического леса" fetchpriority="high">
+        </div>
+        <div class="hero-sticker">Stay<br>wild<br>♡</div>
+        <div class="photo-tag"><strong>В своём ритме</strong>Чай, зелень и новые знакомства</div>
+      </div>
+    </div>
+  </section>
+  <div class="intro-strip">
+    <div class="container strip-inner">
+      <span><i></i> Авторские напитки</span><span><i></i> Знакомство с рептилиями</span><span><i></i> Тропическая атмосфера</span><span><i></i> Медленный отдых</span>
+    </div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-collage">
+        <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=700&q=80" alt="Тропические растения с крупными зелёными листьями" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=700&q=80" alt="Солнечный свет среди комнатных растений" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=700&q=80" alt="Чашка горячего напитка в уютной обстановке" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=700&q=80" alt="Листья тропических растений" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <div class="eyebrow">Наша философия</div>
+        <h2>Островок зелени посреди города</h2>
+        <p>ReptTea — концепция необычной чайной, где можно ненадолго сменить городской ритм на более спокойный. Здесь растения создают настроение, чай помогает замедлиться, а рептилии открывают удивительный мир природы.</p>
+        <p>Мы верим, что знакомство с животными начинается с любопытства и уважения. Поэтому наблюдение и общение с питомцами всегда должны учитывать их комфорт и естественные потребности.</p>
+        <a class="button" href="#experience">Как проходит визит <span aria-hidden="true">→</span></a>
+        <div class="fact-row">
+          <div class="fact"><strong>01</strong><span>Пауза от суеты</span></div>
+          <div class="fact"><strong>Tea</strong><span>Авторские сочетания</span></div>
+          <div class="fact"><strong>Wild</strong><span>Мир рептилий</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section animals" id="animals">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Знакомьтесь поближе</div>
+        <h2>Маленькие большие личности</h2>
+        <p>У каждого вида свой характер, повадки и удивительные особенности. Вот несколько жителей, которые могли бы стать героями нашей истории.</p>
+      </div>
+      <div class="animal-grid">
+        <article class="animal-card">
+          <div class="animal-image"><img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=900&q=85" alt="Ящерица в естественной среде" loading="lazy"><span class="animal-number">01 / Любопытный</span></div>
+          <div class="animal-info"><h3>Зелёный исследователь</h3><p>Наблюдательный обитатель тропического мира, который любит тепло и уютные места для отдыха.</p><div class="animal-meta"><span>Тропический характер</span><span>01</span></div></div>
+        </article>
+        <article class="animal-card">
+          <div class="animal-image"><img src="https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=900&q=85" alt="Рептилия среди природных текстур" loading="lazy"><span class="animal-number">02 / Спокойный</span></div>
+          <div class="animal-info"><h3>Тихий наблюдатель</h3><p>Мастер маскировки и терпения. Иногда самое интересное — просто остановиться и присмотреться.</p><div class="animal-meta"><span>Искусство тишины</span><span>02</span></div></div>
+        </article>
+        <article class="animal-card">
+          <div class="animal-image"><img src="https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?auto=format&fit=crop&w=900&q=85" alt="Черепаха крупным планом" loading="lazy"><span class="animal-number">03 / Неторопливый</span></div>
+          <div class="animal-info"><h3>Философ в панцире</h3><p>Напоминание о том, что у каждого свой темп. Не торопиться — тоже своего рода искусство.</p><div class="animal-meta"><span>Медленный ритм</span><span>03</span></div></div>
+        </article>
+      </div>
+      <div style="text-align:center"><a class="section-link" href="#gallery">Заглянуть в фотогалерею <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <section class="section menu-section" id="menu">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Заварено с характером</div>
+        <h2>Чайная карта</h2>
+        <p>Четыре настроения — от свежих зелёных нот до глубоких пряных оттенков. Демонстрационное меню концептуального заведения.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="drink-card"><div class="drink-image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=700&q=80" alt="Зелёный чай" loading="lazy"></div><div class="drink-info"><span class="drink-type">Свежий · Мягкий</span><h3>Зелёная игуана</h3><p>Матча, кокосовое молоко и лёгкая нота мяты.</p><div class="drink-bottom"><span class="price">120 ₴</span><small>Фирменный напиток</small></div></div></article>
+        <article class="drink-card"><div class="drink-image"><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=700&q=80" alt="Чай в стеклянной чашке" loading="lazy"></div><div class="drink-info"><span class="drink-type">Пряный · Согревающий</span><h3>Янтарный геккон</h3><p>Чёрный чай, облепиха, имбирь и липовый мёд.</p><div class="drink-bottom"><span class="price">110 ₴</span><small>Любимец гостей</small></div></div></article>
+        <article class="drink-card"><div class="drink-image"><img src="https://images.unsplash.com/photo-1542729779-4d6e9b6f8c34?auto=format&fit=crop&w=700&q=80" alt="Травяной напиток с натуральными ингредиентами" loading="lazy"></div><div class="drink-info"><span class="drink-type">Травяной · Нежный</span><h3>Питон-релакс</h3><p>Ромашка, мелисса и чабрец для спокойного вечера.</p><div class="drink-bottom"><span class="price">100 ₴</span><small>Без лишней суеты</small></div></div></article>
+        <article class="drink-card"><div class="drink-image"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="Чай с насыщенным янтарным цветом" loading="lazy"></div><div class="drink-info"><span class="drink-type">Глубокий · Пряный</span><h3>Черепаший пуэр</h3><p>Выдержанный шу пуэр с тёплым ароматом корицы.</p><div class="drink-bottom"><span class="price">140 ₴</span><small>Для вдумчивых пауз</small></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="container experience-grid">
+      <div class="experience-photo"><img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1000&q=85" alt="Тропическая зелень и мягкий солнечный свет" loading="lazy"></div>
+      <div>
+        <div class="eyebrow">Ваше время здесь</div>
+        <h2>Всё просто. И никуда не нужно спешить.</h2>
+        <p style="color:var(--muted)">Мы представляем посещение как спокойное знакомство с необычным пространством, где забота о животных важна не меньше гостеприимства.</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">01</div><div><h3>Выберите время</h3><p>Запланируйте визит и оставьте достаточно времени для отдыха.</p></div></div>
+          <div class="step"><div class="step-num">02</div><div><h3>Познакомьтесь с правилами</h3><p>Сотрудник расскажет, как наблюдать за рептилиями, не нарушая их покой.</p></div></div>
+          <div class="step"><div class="step-num">03</div><div><h3>Откройте новый мир</h3><p>Узнайте интересные факты о животных и насладитесь любимым напитком.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Немного атмосферы</div>
+        <h2>Моменты в оттенках зелени</h2>
+        <p>Природные текстуры, солнечные листья и маленькие детали, из которых складывается настроение ReptTea.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure><img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1000&q=80" alt="Тропическая зелень" loading="lazy"><figcaption>Тропический уголок</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=700&q=80" alt="Крупные листья растений" loading="lazy"><figcaption>Живые оттенки</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=700&q=80" alt="Чайная пауза" loading="lazy"><figcaption>Время для чая</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1100&q=80" alt="Солнечный свет на зелёных растениях" loading="lazy"><figcaption>Пусть день замедлится</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=700&q=80" alt="Тропические листья крупным планом" loading="lazy"><figcaption>Детали природы</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container faq-layout">
+      <div class="faq-intro"><div class="eyebrow">Перед визитом</div><h2>Хорошо знать заранее</h2><p>Небольшие ответы на вопросы, которые могут возникнуть перед знакомством с рептилиями.</p></div>
+      <div class="faq-list">
+        <details><summary>Можно ли трогать животных?</summary><p>Контакт возможен только если он разрешён для конкретного животного и проходит под наблюдением сотрудника. Комфорт и безопасность питомца всегда на первом месте.</p></details>
+        <details><summary>Можно ли приходить с детьми?</summary><p>В концепции предусмотрены семейные посещения. Дети должны находиться рядом со взрослыми и соблюдать правила пространства.</p></details>
+        <details><summary>Нужно ли бронировать заранее?</summary><p>Для демонстрационного проекта предполагается предварительная запись, чтобы распределить поток гостей и не беспокоить животных.</p></details>
+        <details><summary>Можно ли фотографировать?</summary><p>Фотографии без вспышки могут быть допустимы, если это не тревожит животных и не мешает другим посетителям.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-banner" id="booking">
+    <div class="container booking-inner">
+      <div><h2>Ваш маленький побег в тропики начинается здесь.</h2><p>Выберите удобное время и представьте, как проходит ваша следующая чайная пауза.</p></div>
+      <a class="button" href="#contacts">Посмотреть контакты <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="section contacts" id="contacts">
+    <div class="container">
+      <div class="section-head"><div class="eyebrow">Будем рады знакомству</div><h2>Найдите свой зелёный уголок</h2><p>Контактная информация ниже — демонстрационные данные для макета, их нужно заменить перед публикацией.</p></div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>ReptTea</h3>
+          <p style="color:var(--muted)">Тропическая чайная и концепция пространства знакомства с рептилиями.</p>
+          <ul class="contact-lines">
+            <li><span>Адрес</span><strong>Одесса, пример адреса</strong></li>
+            <li><span>Пн–Пт</span><strong>11:00–21:00</strong></li>
+            <li><span>Сб–Вс</span><strong>10:00–22:00</strong></li>
+            <li><span>Телефон</span><strong>+38 (000) 000-00-00</strong></li>
+          </ul>
+          <div class="social-links"><a href="#contacts">Instagram</a><a href="#contacts">Telegram</a><a href="#contacts">Facebook</a></div>
+        </div>
+        <div class="map-panel">
+          <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy">
+          <div class="map-overlay"><div class="map-label"><strong>📍 ReptTea · Одесса</strong><span>Здесь можно разместить карту и ссылку на маршрут после выбора реального адреса.</span></div></div>
+        </div>
+      </div>
+      <p class="disclaimer">Учебный концепт. Фотографии загружаются с Unsplash по внешним ссылкам; перед публикацией проверьте лицензию каждого конкретного изображения и при необходимости укажите авторство.</p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <a class="logo" href="#top"><span class="logo-mark">R</span>Rept<span>Tea</span></a>
+    <p>© 2026 ReptTea · Концепт для портфолио</p>
+    <div class="footer-links"><a href="#about">О проекте</a><a href="#menu">Меню</a><a href="#contacts">Контакты</a></div>
+  </div>
+</footer>
+<script>
+/* Только демонстрационное мобильное меню; бизнес-функции не подключены. */
+const menuButton = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+menuButton.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('is-open');
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  menuButton.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+  menuButton.textContent = isOpen ? '×' : '☰';
+});
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  nav.classList.remove('is-open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', 'Открыть меню');
+  menuButton.textContent = '☰';
+}));
+</script>
+</body>
+</html>
